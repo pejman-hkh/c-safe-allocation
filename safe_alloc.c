@@ -20,6 +20,10 @@ void * safe_alloc_new( safe_alloc *a, int size ) {
 	return ret;
 }
 
+void * safe_alloc_get( safe_alloc *a ) {
+	return a->allocate[a->i-1];
+}
+
 void safe_free( safe_alloc *a) {
 	for( int i = 0; i < a->i; i++ ) {
 		free(a->allocate[i]);
@@ -33,9 +37,12 @@ int main(int argc, char const *argv[])
 {
 	safe_alloc_init( &allocate );
 	char *t = safe_alloc_new( &allocate, 10 );
+	*t++ = 't';
+	*t++ = 'e';
+	*t++ = 's';
+	*t++ = 't';
 
-	strcpy( t, "test1");
-	printf("%s\n", t);
+	printf("%s\n", safe_alloc_get( &allocate ) );
 
 	char *t1 = safe_alloc_new( &allocate, 10 );
 	strcpy( t1, "test2");
