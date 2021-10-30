@@ -10,12 +10,12 @@ typedef struct
 
 void safe_alloc_init( safe_alloc *a ) {
 	a->i = 0;
-	a->allocate = malloc( sizeof(safe_alloc) );
+	a->allocate = malloc( sizeof(int) );
 }
 
 void * safe_alloc_new( safe_alloc *a, int size ) {
 	void *ret = malloc( size );
-	a->allocate = realloc(a->allocate, sizeof(safe_alloc) + (a->i * 2) );
+	a->allocate = realloc(a->allocate, sizeof(int) + (a->i * 2) );
 	a->allocate[a->i++] = ret;
 	return ret;
 }
