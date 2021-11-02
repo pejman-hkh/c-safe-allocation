@@ -15,7 +15,7 @@ void safe_alloc_init( safe_alloc *a ) {
 
 void * safe_alloc_new( safe_alloc *a, int size ) {
 	void *ret = malloc( size );
-	a->allocate = realloc(a->allocate, sizeof(int) + (a->i * 2) );
+	a->allocate = realloc(a->allocate, sizeof(int) * (a->i + 1) );
 	a->allocate[a->i++] = ret;
 	return ret;
 }
